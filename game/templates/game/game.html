@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page_title">{{ formatted_count }} | Clicker Game</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page_title">{{ formatted_count }} | Clicker Game</title>
 </head>
 <body>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <h1 id="count">{{ formatted_count }}</h1>
-    <form method="post" enctype="multipart/form-data" id="post-form">
-        {% csrf_token %}
-        <button type="submit" value="clicked">Click Me!</button>
-    </form>
-    <script>
-        $(document).ready(
-          $('#post-form').submit(function(e){
-            e.preventDefault();
-            var serializedData = $(this).serialize();
-            
-            $.ajax({
-              type:"POST",
-              url: "/play/",
-              data:  serializedData,
-              success: function(data){
-                $("#count").text(data["formatted_count"]);
-                $("#page_title").text(data["formatted_count"] + " | Clicker Game");
-              }
-            });
-          })
-        );
-        </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <h1 id="count">{{ formatted_count }}</h1>
+  <form method="post" enctype="multipart/form-data" id="post-form">
+      {% csrf_token 
+      <button type="submit" value="clicked">Click Me!</button>
+  </form>
+  <script>
+    $(document).ready(
+      $('#post-form').submit(function(e){
+        e.preventDefault();
+        var serializedData = $(this).serialize();
+        
+        $.ajax({
+          type:"POST",
+          url: "/play/",
+          data:  serializedData,
+          success: function(data){
+            $("#count").text(data["formatted_count"]); // Dynamically update the count for id #count
+            $("#page_title").text(data["formatted_count"] + " | Clicker Game"); // Dynamically update the count for id #page_title
+          }
+        });
+      })
+    );
+  </script>
 </body>
 </html>
