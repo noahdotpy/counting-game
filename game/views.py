@@ -4,20 +4,20 @@ from django.http import JsonResponse
 from .models import Counter
 
 # Create your views here.
+
+
 def play(request):
-    # question = get_object_or_404(Question, id=1)
-    # clicked_bool = Clicker.objects.get(id=request.POST["clicked"])
-    # if clicked_bool:
-    #     c = Clicker.objects.get(id=1)
-    #     c.clicks += 1
-    #     c.save()
+    counter = Counter.objects.get(id=1)
     if request.method == 'POST':
-        counter = Counter.objects.get(id=1)
         counter.count += 1
         counter.save()
-        return JsonResponse({"count": counter.count})
+        context = {"count": counter.count,
+                   "formatted_count": "{:,}".format(counter.count)
+                   }
+        return JsonResponse(context)
     else:
         context = {
-            "counter": Counter.objects.get(id=1)
+            "counter": counter.count,
+            "formatted_count": "{:,}".format(counter.count),
         }
         return render(request, 'game/game.html', context)
