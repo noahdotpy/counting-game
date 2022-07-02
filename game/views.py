@@ -6,6 +6,7 @@ from .models import Counter
 # Create your views here.
 
 
+# TODO: Add async methods to get count from server every half second and update client count.
 def play(request):
     counter = Counter.objects.get(id=1)
     if request.method == 'POST':
