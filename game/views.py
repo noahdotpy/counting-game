@@ -12,13 +12,14 @@ def play(request):
     if request.method == 'POST':
         counter.count += 1
         counter.save()
-        context = {"count": counter.count,
-                   "formatted_count": "{:,}".format(counter.count)
-                   }
+        context = {
+            "count": counter.count,
+            "formatted_count": "{:,}".format(counter.count)
+        }
         return JsonResponse(context)
     else:
         context = {
-            "counter": counter.count,
+            "count": counter.count,
             "formatted_count": "{:,}".format(counter.count),
         }
         return render(request, 'game/game.html', context)
